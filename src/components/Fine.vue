@@ -1,8 +1,15 @@
 <template>
-  <div class="hello">
+  <div class="fine">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <h1>{{ msg }}</h1>
     <h2>nice try2</h2>
-<router-link to="/">fine</router-link>
+    <router-link to="/HelloWorld">HelloWorld</router-link>
+    <div id="shit">
+      <el-button @click="visible = true">Button</el-button>
+      <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Try Element</p>
+      </el-dialog>
+    </div>
     <ul>
       <li>
         <a href="https://vuejs.org" target="_blank">Core Docs</a>
@@ -37,18 +44,21 @@
       </li>
     </ul>
   </div>
-</template>
 
+
+</template>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "Fine",
+  data() {
     return {
-      msg: '我是好多号i22222我的厚爱'
-    }
+      msg: "我是finew的厚爱",
+      visible: false
+    };
   }
-}
-
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
