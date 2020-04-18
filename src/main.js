@@ -8,8 +8,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from 'axios'
+import VueResource from 'vue-resource'
 
 Vue.use(ElementUI);
+Vue.use(VueResource);
 
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
@@ -26,8 +28,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
 // axios.defaults.baseURL = 'http://localhost:8080/项目名/';
 
-axios.defaults.baseURL = 'http://106.12.17.163:5560/';
-
+//axios.defaults.baseURL = '/api';
 
 /* eslint-disable no-new */
 new Vue({
