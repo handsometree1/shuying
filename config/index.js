@@ -3,7 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+const config = require('../src/pyconfig')
 module.exports = {
   dev: {
 
@@ -11,14 +11,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/*':{
-      target:'http://106.12.17.163:5560/',
-      changeOrigin: true,
-      pathRewrite:{
-        '^/api':'/'
-      }
-    }
-  },
+     /* '/api/*': {
+        target: 'http://106.12.17.163:5560/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }},
+        [config.ROOT]: {
+          target: config.PROXYROOT,
+          changeOrigin: true,
+          pathRewrite: {
+            [`^${config.ROOT}`]: '/'
+          }
+        }*/
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -28,7 +34,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
