@@ -29,7 +29,7 @@
       <!-- 内容区 -->
       <el-main>
         <template>
-      
+      <Aside></Aside>
         </template>
       </el-main>
     </el-container>

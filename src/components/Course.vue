@@ -1,11 +1,13 @@
 <template>
-  <!-- 密码重置 -->
-  <div class="Course">添加课程</div>
+  <div class="course">
+    添加课程
+    <p>nowaidhopahndawodawdwawadwa</p>
+  </div>
 </template>
 <script>
 export default {
-    name: "Course"
+  name: "Course"
 };
 </script>
-<style scoped>
+<style>
 </style>

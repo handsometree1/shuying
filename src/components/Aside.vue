@@ -71,10 +71,10 @@ export default {
       console.log(key, keyPath);
     },
      navUser() {
-      this.$router.push("/MainPage/User");
+      this.$router.push("/MainPage/User").catch(err => {err});
     },
     navPwd(){
-       this.$router.push("/MainPage/Course");
+       this.$router.push("/Course").catch(err => {err});
     }
   }
 };

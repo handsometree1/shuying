@@ -6,6 +6,7 @@ const Fine =()=>import('@/components/Fine')
 const Login =()=>import('@/components/Login')
 const MainPage =()=>import('@/components/MainPage')
 const User =()=>import('@/components/User')
+const Course =()=>import('@/components/Course')
 Vue.use(Router)
 
 export default new Router({
@@ -30,9 +31,10 @@ export default new Router({
       path: '/MainPage',
       name: 'MainPage',
       component: MainPage,
+      redirect:"User",
       children: [
-        {path: 'User', name: 'User', component: User, },
-        {path: 'Course', name: 'Course', component: ()=>import('@/components/Course'), },
+        {path: '/User', name: 'User', component: User},
+        {path: '/Course', name: 'Course', component: Course},
       ]
     }
   ]
