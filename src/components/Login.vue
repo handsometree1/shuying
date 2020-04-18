@@ -38,7 +38,7 @@ export default {
         let _this=this;
       this.$ajax
         .get(
-          "/api/getAdminData?userNumber=" +
+          "http://localhost:5560/getAdminData?userNumber=" +
             this.form.name +
             "&userPass=" +
             this.form.pass
