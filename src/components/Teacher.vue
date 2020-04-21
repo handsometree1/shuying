@@ -1,5 +1,6 @@
 <template>
-  <div class="Course">
+  <!-- 用户管理 -->
+  <div class="Teacher">
     <el-container>
       <el-header style="height:150px">
         <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
@@ -36,41 +37,48 @@
         </el-form>
       </el-header>
       <el-main>
-        <el-table ref="multipleTable"
-      :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-      tooltip-effect="dark"
-      style="width: 100%"
-      >
-          <el-table-column fixed prop="courseId" label="编号" width="50"></el-table-column>
-          <el-table-column prop="courseName" label="课程名称" width="120"></el-table-column>
-          <el-table-column prop="courseYear" label="学年" width="120"></el-table-column>
-          <el-table-column prop="courseWeek" label="课程周数" width="120"></el-table-column>
+        <el-table
+          ref="multipleTable"
+          :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+          tooltip-effect="dark"
+          style="width: 100%"
+        >
+          <el-table-column fixed prop="id" label="编号" width="50"></el-table-column>
+          <el-table-column prop="userName" label="姓名" width="120"></el-table-column>
+          <el-table-column prop="userNumber" label="教师编号" width="120"></el-table-column>
+          <el-table-column prop="userSex" label="性别" width="120"></el-table-column>
+          <el-table-column prop="openId" label="openId" width="300" :formatter="openIdFormat"></el-table-column>
+          <el-table-column prop="bind_time" label="绑定时间" width="160" :formatter="bindtimeFormat"></el-table-column>
+          <el-table-column
+            prop="create_time"
+            label="创建时间"
+            width="160"
+            :formatter="createtimeFormat"
+          ></el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button @click="toCourseDetail(scope.row)" type="text" size="small">查看</el-button>
+              <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
               <el-button type="text" size="small">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
         <div style="text-align: center;margin-top: 30px;">
-      <el-pagination class="footer"
-        background
-        layout="prev, pager, next"
-        :total="total"
-        @current-change="current_change">
-      </el-pagination>
-    </div>
+          <el-pagination
+            class="footer"
+            background
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="current_change"
+          ></el-pagination>
+        </div>
       </el-main>
     </el-container>
   </div>
 </template>
 <script>
 export default {
-  name: "Course",
+  name: "Teacher",
   methods: {
-      toCourseDetail(row) {
-            this.$router.push({path: '/CourseDetail',query:{courseId:row.courseId,courseName:row.courseName,courseYear:row.courseYear,courseWeek:row.courseWeek,courseImageUrl:row.courseImageUrl}});
-        },
     handleClick(row) {
       console.log(row);
     },
@@ -90,20 +98,21 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
-     upFile(){
-       console.log("upload success!!!")
-     },
+    upFile() {
+      console.log("upload success!!!");
+    },
     fileChange(file, fileList) {
       // console.log(file.raw)
       this.dataList = fileList;
     },
-    openIdFormat(row, column){
-     if(row.openId  !=null){
-       return row.openId;
-     }else if(row.openId ==null)
-     {
-       return "尚未绑定"
-     }else{return "数据异常"}
+    openIdFormat(row, column) {
+      if (row.openId != null) {
+        return row.openId;
+      } else if (row.openId == null) {
+        return "尚未绑定";
+      } else {
+        return "数据异常";
+      }
     },
     bindtimeFormat(row, column) {
       //console.log(row.create_time);
@@ -155,11 +164,13 @@ export default {
         return "数据异常";
       }
     },
-submitUploadList(){this.$refs.upload.submit();},
-   current_change:function(currentPage){
-        this.currentPage = currentPage;
-        console.log(currentPage);
-      },
+    submitUploadList() {
+      this.$refs.upload.submit();
+    },
+    current_change: function(currentPage) {
+      this.currentPage = currentPage;
+      console.log(currentPage);
+    },
     httpRequest(param) {
       console.log(param);
       let fileObj = param.file; // 相当于input里取得的files
@@ -221,33 +232,35 @@ submitUploadList(){this.$refs.upload.submit();},
     return {
       tableData: null,
       fileList: [],
-        multipleSelection: [],
-        total: 0,
-        pagesize:10,
-        currentPage:1
+      multipleSelection: [],
+      total: 0,
+      pagesize: 10,
+      currentPage: 1
     };
   },
   created: function() {
     // `this` 指向 vm 实例
     console.log("执行created函数");
     var _this = this;
-    this.$ajax.get("http://106.12.17.163:5560/getAllCourse").then(
-      function(res) {
-        var result = res;
-        console.log(res.data);
-        if (res.data != null) {
-          console.log("成功获取课程数据");
-          //_this.$router.push({path:'/MainPage'});
-          //_this.data.tableData=res.data;
-          _this.total= res.data.length;
-          _this.tableData = res.data;
+    this.$ajax
+      .get("http://106.12.17.163:5560/getAllUser?user_identity=teacher")
+      .then(
+        function(res) {
+          var result = res;
+          console.log(res.data);
+          if (res.data != null) {
+            console.log("成功获取教师数据");
+            //_this.$router.push({path:'/MainPage'});
+            //_this.data.tableData=res.data;
+            _this.total = res.data.length;
+            _this.tableData = res.data;
+          }
+        },
+        function(res) {
+          var result = res;
+          console.log("error:" + res);
         }
-      },
-      function(res) {
-        var result = res;
-        console.log("error:" + res);
-      }
-    );
+      );
   }
 };
 </script>

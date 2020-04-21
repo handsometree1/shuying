@@ -14,20 +14,20 @@
           <span>用户管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="11" @click="navUser">用户管理</el-menu-item>
+          <el-menu-item index="11" @click="navStudent">学生管理</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
-          <el-menu-item index="12" @click="navPwd">密码重置</el-menu-item>
+          <el-menu-item index="12" @click="navTeacher">教师管理</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <!-- 子菜单：商品管理 -->
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-menu"></i>
-          <span>商品管理</span>
+          <span>课程管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="21">商品分类</el-menu-item>
+          <el-menu-item index="21" @click="navCourse">课程管理</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
           <el-menu-item index="22">商品管理</el-menu-item>
@@ -59,7 +59,7 @@
 
 <script>
 export default {
-    name: "Aside",
+  name: "Aside",
   data() {
     return {};
   },
@@ -70,15 +70,23 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-     navUser() {
-      this.$router.push("/MainPage/User").catch(err => {err});
+    navStudent() {
+     /* this.$router.push("/User").catch(err => {
+        err;
+      });*/
+      this.$emit("getPageCur", "Student");
     },
-    navPwd(){
-       this.$router.push("/Course").catch(err => {err});
+    navCourse() {
+      this.$emit("getPageCur", "Course");
+      /*this.$router.push("/Course").catch(err => {
+        err;
+      });*/
+    },
+    navTeacher(){
+      this.$emit("getPageCur", "Teacher");
     }
   }
 };
 </script>
-
 <style scoped>
 </style>

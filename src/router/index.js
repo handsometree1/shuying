@@ -6,7 +6,9 @@ const Fine =()=>import('@/components/Fine')
 const Login =()=>import('@/components/Login')
 const MainPage =()=>import('@/components/MainPage')
 const User =()=>import('@/components/User')
+const Teacher =()=>import('@/components/Teacher')
 const Course =()=>import('@/components/Course')
+const CourseDetail =()=>import('@/components/CourseDetail')
 Vue.use(Router)
 
 export default new Router({
@@ -28,6 +30,11 @@ export default new Router({
       component: Login
     },
     {
+      path: '/CourseDetail',
+      name: 'CourseDetail',
+      component: CourseDetail
+    },
+    {
       path: '/MainPage',
       name: 'MainPage',
       component: MainPage,
@@ -35,6 +42,7 @@ export default new Router({
       children: [
         {path: '/User', name: 'User', component: User},
         {path: '/Course', name: 'Course', component: Course},
+        {path: '/Teacher', name: 'Teacher', component: Teacher}
       ]
     }
   ]

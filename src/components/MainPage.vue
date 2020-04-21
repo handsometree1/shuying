@@ -24,12 +24,15 @@
     <el-container>
       <!-- 侧边栏 -->
       <el-aside>
-        <Aside />
+        <Aside @getPageCur="getPageCur"/>
       </el-aside>
       <!-- 内容区 -->
       <el-main>
         <template>
-      <Aside></Aside>
+      <Aside v-if="pageCur==='Aside'"></Aside>
+      <User v-if="pageCur==='Student'"></User>
+      <Course v-if="pageCur==='Course'"></Course>
+      <Teacher v-if="pageCur==='Teacher'"></Teacher>
         </template>
       </el-main>
     </el-container>
@@ -41,18 +44,29 @@
 import Aside from "@/components/Aside";
 import User from "@/components/User";
 import Course from "@/components/Course";
+import Teacher from "@/components/Teacher";
 export default {
   name: "MainPage",
   components: {
     Aside,
     User,
-    Course
+    Course,
+    Teacher
   },
   data() {
     return {
       url: "/logo.png",
-      fits: ["fill", "contain", "cover", "none", "scale-down"]
+      fits: ["fill", "contain", "cover", "none", "scale-down"],
+      msg: "父组件默认值",
+      pageCur:"Student"
     };
+  },
+  methods:{
+     getPageCur(data) {
+      this.pageCur = data;
+      console.log(this.pageCur)
+    }
+
   }
 };
 </script>

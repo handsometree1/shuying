@@ -16,6 +16,7 @@ Vue.use(VueResource);
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 
+
 // axios 配置
 
 axios.defaults.timeout = 5000;
