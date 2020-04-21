@@ -157,7 +157,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    /* display: block; */
+    display: unset;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding-left: 24px;
