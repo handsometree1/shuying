@@ -152,7 +152,7 @@ export default {
 };
 </script>
 <style>
-.el-transfer-panel__item.el-checkbox .el-checkbox__label {
+ .el-transfer-panel__item.el-checkbox .el-checkbox__label {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;

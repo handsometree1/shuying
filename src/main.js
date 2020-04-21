@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from 'axios'
 import VueResource from 'vue-resource'
+import '@/file/reset.css'
 
 Vue.use(ElementUI);
 Vue.use(VueResource);
@@ -17,7 +18,7 @@ Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 
 
-// axios 配置
+// axios 配置bpm run dev
 
 axios.defaults.timeout = 5000;
 
