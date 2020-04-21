@@ -151,20 +151,17 @@ export default {
   }
 };
 </script>
-<style >
+<style>
 .el-transfer-panel__item.el-checkbox .el-checkbox__label {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: unset;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-left: 24px;
-  line-height: 30px;
-}
-.el-checkbox:last-of-type {
-  /* margin-right: 0; */
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* display: block; */
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 24px;
+    line-height: 30px;
 }
 </style>
 
