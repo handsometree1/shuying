@@ -30,14 +30,17 @@
           <el-menu-item index="21" @click="navCourse">课程管理</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
-          <el-menu-item index="22">商品管理</el-menu-item>
+          <el-menu-item index="22" @click="navCourseTeacherRelation">教师课程管理</el-menu-item>
+        </el-menu-item-group>
+                <el-menu-item-group>
+          <el-menu-item index="24" @click="navCourseTeacherAssignClass">班级-课程管理</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <!-- 子菜单：订单管理 -->
       <el-submenu index="3">
         <template slot="title">
           <i class="el-icon-document"></i>
-          <span>订单管理</span>
+          <span>活动管理</span>
         </template>
         <el-menu-item-group>
           <el-menu-item index="31">订单管理</el-menu-item>
@@ -84,6 +87,12 @@ export default {
     },
     navTeacher(){
       this.$emit("getPageCur", "Teacher");
+    },
+    navCourseTeacherRelation(){
+      this.$emit("getPageCur", "CourseTeacherAssign");
+    },
+    navCourseTeacherAssignClass(){
+      this.$emit("getPageCur", "CourseTeacherAssignClass");
     }
   }
 };

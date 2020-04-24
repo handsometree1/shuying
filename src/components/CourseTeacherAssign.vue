@@ -1,5 +1,5 @@
 <template>
-  <div class="Course">
+  <div class="CourseTeacherAssign">
     <el-container>
       <el-header style="height:150px">
         <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
@@ -9,7 +9,7 @@
           label-width="100px"
           style="width:70%;margin-left:50px;"
         >
-          <el-form-item label="上传文件以添加课程：" prop="file">
+          <el-form-item label="添加班级信息" prop="file">
             <el-upload
               class="upload-demo"
               ref="upload"
@@ -36,41 +36,64 @@
         </el-form>
       </el-header>
       <el-main>
-        <el-table ref="multipleTable"
-      :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-      tooltip-effect="dark"
-      style="width: 100%"
-      >
-          <el-table-column fixed prop="courseId" label="编号" width="50"></el-table-column>
+        <el-table
+          ref="multipleTable"
+          :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+          tooltip-effect="dark"
+          style="width: 100%"
+        >
+          <el-table-column fixed prop="courseImageUrl" label="课程图片" width="120">
+            <template slot-scope="scope">
+              <!-- <img :src="scope.row.courseImageUrl"  min-width="70" height="70" />-->
+              <el-image
+                style="width: 100px; height: 70px"
+                :src="scope.row.courseImageUrl"
+                fit="cover"
+              ></el-image>
+            </template>
+          </el-table-column>
+          <el-table-column fixed prop="assignId" label="课程-教师编号" width="150"></el-table-column>
+          <el-table-column  prop="courseId" label="课程编号" width="120"></el-table-column>
           <el-table-column prop="courseName" label="课程名称" width="120"></el-table-column>
-          <el-table-column prop="courseYear" label="学年" width="120"></el-table-column>
-          <el-table-column prop="courseWeek" label="课程周数" width="120"></el-table-column>
+          <el-table-column prop="userId" label="教师编号" width="120"></el-table-column>
+          <el-table-column prop="userName" label="教师名称" width="120"></el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button @click="toCourseDetail(scope.row)" type="text" size="small">查看</el-button>
+              <el-button @click="toCourseTeacherAssignDetail(scope.row)" type="text" size="small">查看</el-button>
               <el-button type="text" size="small">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
         <div style="text-align: center;margin-top: 30px;">
-      <el-pagination class="footer"
-        background
-        layout="prev, pager, next"
-        :total="total"
-        @current-change="current_change">
-      </el-pagination>
-    </div>
+          <el-pagination
+            class="footer"
+            background
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="current_change"
+          ></el-pagination>
+        </div>
       </el-main>
     </el-container>
   </div>
 </template>
 <script>
 export default {
-  name: "Course",
+  name: "CourseTeacherAssign",
   methods: {
-      toCourseDetail(row) {
-            this.$router.push({path: '/CourseDetail',query:{courseId:row.courseId,courseName:row.courseName,courseYear:row.courseYear,courseWeek:row.courseWeek,courseImageUrl:row.courseImageUrl}});
-        },
+    toCourseTeacherAssignDetail(row) {
+      this.$router.push({
+        path: "/CourseTeacherAssignDetail",
+        query: {
+          assignId:row.assignId,
+          courseId: row.courseId,
+          courseName: row.courseName,
+          userId: row.userId,
+          userName: row.userName,
+          courseImageUrl: row.courseImageUrl
+        }
+      });
+    },
     handleClick(row) {
       console.log(row);
     },
@@ -90,20 +113,21 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
-     upFile(){
-       console.log("upload success!!!")
-     },
+    upFile() {
+      console.log("upload success!!!");
+    },
     fileChange(file, fileList) {
       // console.log(file.raw)
       this.dataList = fileList;
     },
-    openIdFormat(row, column){
-     if(row.openId  !=null){
-       return row.openId;
-     }else if(row.openId ==null)
-     {
-       return "尚未绑定"
-     }else{return "数据异常"}
+    openIdFormat(row, column) {
+      if (row.openId != null) {
+        return row.openId;
+      } else if (row.openId == null) {
+        return "尚未绑定";
+      } else {
+        return "数据异常";
+      }
     },
     bindtimeFormat(row, column) {
       //console.log(row.create_time);
@@ -155,11 +179,13 @@ export default {
         return "数据异常";
       }
     },
-submitUploadList(){this.$refs.upload.submit();},
-   current_change:function(currentPage){
-        this.currentPage = currentPage;
-        console.log(currentPage);
-      },
+    submitUploadList() {
+      this.$refs.upload.submit();
+    },
+    current_change: function(currentPage) {
+      this.currentPage = currentPage;
+      console.log(currentPage);
+    },
     httpRequest(param) {
       console.log(param);
       let fileObj = param.file; // 相当于input里取得的files
@@ -168,7 +194,7 @@ submitUploadList(){this.$refs.upload.submit();},
       //fd.append("platNum", this.importList.platNum);
       //fd.append("taskName", this.importList.taskName);
 
-      let url = "http://106.12.17.163:5560/addCourseByExcel";
+      let url = "http://106.12.17.163:5560/getCourseAssignClassByExcel";
       let config = {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -221,17 +247,17 @@ submitUploadList(){this.$refs.upload.submit();},
     return {
       tableData: null,
       fileList: [],
-        multipleSelection: [],
-        total: 0,
-        pagesize:10,
-        currentPage:1
+      multipleSelection: [],
+      total: 0,
+      pagesize: 10,
+      currentPage: 1
     };
   },
   created: function() {
     // `this` 指向 vm 实例
     console.log("执行created函数");
     var _this = this;
-    this.$ajax.get("http://106.12.17.163:5560/getAllCourse").then(
+    this.$ajax.get("http://106.12.17.163:5560/getAllCourseAssignRelationship").then(
       function(res) {
         var result = res;
         console.log(res.data);
@@ -239,7 +265,7 @@ submitUploadList(){this.$refs.upload.submit();},
           console.log("成功获取课程数据");
           //_this.$router.push({path:'/MainPage'});
           //_this.data.tableData=res.data;
-          _this.total= res.data.length;
+          _this.total = res.data.length;
           _this.tableData = res.data;
         }
       },

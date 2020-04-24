@@ -4,7 +4,7 @@
     <el-header>
       <el-row>
         <el-col :span="12">
-          <el-image style="width: 210px; height: 54px" :src="url"></el-image>
+          <el-image style="width: 210px; height: 80px" :src="url"></el-image>
         </el-col>
         <el-col class="logout" :span="12">
           <template>
@@ -33,6 +33,8 @@
       <User v-if="pageCur==='Student'"></User>
       <Course v-if="pageCur==='Course'"></Course>
       <Teacher v-if="pageCur==='Teacher'"></Teacher>
+      <CourseTeacherAssign v-if="pageCur==='CourseTeacherAssign'"></CourseTeacherAssign>
+      <CourseTeacherAssignClass v-if="pageCur==='CourseTeacherAssignClass'"></CourseTeacherAssignClass>
         </template>
       </el-main>
     </el-container>
@@ -45,17 +47,21 @@ import Aside from "@/components/Aside";
 import User from "@/components/User";
 import Course from "@/components/Course";
 import Teacher from "@/components/Teacher";
+import CourseTeacherAssign from "@/components/CourseTeacherAssign";
+import CourseTeacherAssignClass from "@/components/CourseTeacherAssignClass";
 export default {
   name: "MainPage",
   components: {
     Aside,
     User,
     Course,
-    Teacher
+    Teacher,
+    CourseTeacherAssign,
+    CourseTeacherAssignClass
   },
   data() {
     return {
-      url: "/logo.png",
+      url: "https://shuying-course-picture.oss-cn-chengdu.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F.png",
       fits: ["fill", "contain", "cover", "none", "scale-down"],
       msg: "父组件默认值",
       pageCur:"Student"

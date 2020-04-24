@@ -9,6 +9,10 @@ const User =()=>import('@/components/User')
 const Teacher =()=>import('@/components/Teacher')
 const Course =()=>import('@/components/Course')
 const CourseDetail =()=>import('@/components/CourseDetail')
+const CourseTeacherAssign =()=>import('@/components/CourseTeacherAssign')
+const CourseTeacherAssignDetail =()=>import('@/components/CourseTeacherAssignDetail')
+const CourseTeacherAssignClass =()=>import('@/components/CourseTeacherAssignClass')
+const CourseTeacherAssignClassDetail =()=>import('@/components/CourseTeacherAssignClassDetail')
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +22,11 @@ export default new Router({
       path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/CourseTeacherAssignDetail',
+      name: 'CourseTeacherAssignDetail',
+      component: CourseTeacherAssignDetail
     },
     {
       path: '/Fine',
@@ -35,6 +44,11 @@ export default new Router({
       component: CourseDetail
     },
     {
+      path: '/CourseTeacherAssignClassDetail',
+      name: 'CourseTeacherAssignClassDetail',
+      component: CourseTeacherAssignClassDetail
+    },
+    {
       path: '/MainPage',
       name: 'MainPage',
       component: MainPage,
@@ -42,7 +56,9 @@ export default new Router({
       children: [
         {path: '/User', name: 'User', component: User},
         {path: '/Course', name: 'Course', component: Course},
-        {path: '/Teacher', name: 'Teacher', component: Teacher}
+        {path: '/Teacher', name: 'Teacher', component: Teacher},
+        {path: '/CourseTeacherAssign', name: 'CourseTeacherAssign', component: CourseTeacherAssign},
+        {path: '/CourseTeacherAssignClass', name: 'CourseTeacherAssignClass', component: CourseTeacherAssignClass}
       ]
     }
   ]

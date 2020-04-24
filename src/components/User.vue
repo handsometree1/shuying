@@ -5,7 +5,7 @@
       <el-header style="height:150px">
         <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
         <el-collapse v-model="activeNames" @change="handleChange">
-         <el-collapse-item title="点击上传文件" name="2">
+         <el-collapse-item title="点击上传文件添加学生" name="2">
         <el-form
           ref="importList"
           label-position="left"

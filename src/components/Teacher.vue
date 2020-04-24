@@ -10,7 +10,7 @@
           label-width="100px"
           style="width:70%;margin-left:50px;"
         >
-          <el-form-item label="Excel文件：" prop="file">
+          <el-form-item label="点击上传文件添加教师：" prop="file">
             <el-upload
               class="upload-demo"
               ref="upload"
